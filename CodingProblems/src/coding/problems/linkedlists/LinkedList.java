@@ -12,27 +12,31 @@ public class LinkedList<E> {
 
 	private LinkedListNode<E> head;
 
-	public void removeElement(E elementToRemove) {
-
-		if (this.getHead().getData().equals(elementToRemove)) {
-			this.setHead(head.getNextNode());
-		}
-
-		LinkedListNode<E> currentNode = this.getHead();
-		while (currentNode.getNextNode() != null) {
-			LinkedListNode<E> nextNode = currentNode.getNextNode();
-			if (nextNode.getData().equals(elementToRemove)) {
-				currentNode.setNextNode(nextNode.getNextNode());
-			}
-		}
-	}
-
 	public LinkedListNode<E> getHead() {
 		return head;
 	}
 
 	public void setHead(LinkedListNode<E> head) {
 		this.head = head;
+	}
+
+	/**
+	 * Gets the number of nodes that have a particular data value.
+	 * 
+	 * @param elementToCount
+	 *            Data value to count.
+	 * @return
+	 */
+	public int getElementCount(E elementToCount) {
+		int elementCount = 0;
+		LinkedListNode<E> currentNode = this.getHead();
+		while (currentNode != null) {
+			if (currentNode.getData().equals(elementToCount)) {
+				elementCount++;
+			}
+			currentNode = currentNode.getNextNode();
+		}
+		return elementCount;
 	}
 
 }

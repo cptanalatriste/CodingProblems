@@ -14,34 +14,34 @@ public class DuplicatesRemover<E> {
 	public void removeDuplicates(LinkedList<E> linkedList) {
 		LinkedListNode<E> currentNode = linkedList.getHead();
 		while (currentNode != null) {
-			int elementCount = getElementCount(currentNode.getData(),
-					linkedList);
-			if (elementCount > 1) {
-				removeFrom(currentNode.getData(), currentNode);
-			}
+			removeFrom(currentNode.getData(), currentNode);
 			currentNode = currentNode.getNextNode();
 		}
 	}
 
-	public int getElementCount(E elementToCount, LinkedList<E> linkedList) {
-		int elementCount = 0;
-		LinkedListNode<E> currentNode = linkedList.getHead();
-		while (currentNode != null) {
-			if (currentNode.getData().equals(elementToCount)) {
-				elementCount++;
-			}
-			currentNode = currentNode.getNextNode();
-		}
-		return elementCount;
-	}
-
+	/**
+	 * Removes elements that have a particular data value, excluding the node
+	 * that starts the traversal.
+	 * 
+	 * @param elementToRemove
+	 *            Element to remove.
+	 * @param nodeToStart
+	 *            Node that starts the list traversal.
+	 */
 	private void removeFrom(E elementToRemove, LinkedListNode<E> nodeToStart) {
-		LinkedListNode<E> currentNode = nodeToStart.getNextNode();
+		LinkedListNode<E> currentNode = nodeToStart;
+		LinkedListNode<E> nextNode = null;
+		LinkedListNode<E> previousNode = null;
+
 		while (currentNode != null) {
-			LinkedListNode<E> nextNode = currentNode.getNextNode();
-			if (nextNode.getData().equals(elementToRemove)) {
+			nextNode = currentNode.getNextNode();
+			if (nextNode != null && elementToRemove.equals(nextNode.getData())) {
 				currentNode.setNextNode(nextNode.getNextNode());
+			} else if (nextNode == null
+					&& elementToRemove.equals(currentNode.getData())) {
+				previousNode.setNextNode(null);
 			}
+			previousNode = currentNode;
 			currentNode = currentNode.getNextNode();
 		}
 	}

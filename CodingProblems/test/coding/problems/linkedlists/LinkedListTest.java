@@ -5,15 +5,13 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DuplicatesRemoverTest {
+public class LinkedListTest {
 
-	private LinkedList<Integer> listWithDuplicates;
-	private DuplicatesRemover<Integer> duplicatesRemover;
+	private LinkedList<Integer> linkedListForTest;
 
 	@Before
 	public void setUp() throws Exception {
-		listWithDuplicates = new LinkedList<Integer>();
-		duplicatesRemover = new DuplicatesRemover<Integer>();
+		linkedListForTest = new LinkedList<Integer>();
 
 		LinkedListNode<Integer> firstNode = new LinkedListNode<Integer>(1);
 		LinkedListNode<Integer> secondNode = new LinkedListNode<Integer>(2);
@@ -30,16 +28,16 @@ public class DuplicatesRemoverTest {
 		fifthNode.setNextNode(sixthNode);
 		sixthNode.setNextNode(seventhNode);
 
-		listWithDuplicates.setHead(firstNode);
+		linkedListForTest.setHead(firstNode);
 
 	}
 
 	@Test
-	public void testRemoveDuplicates() {
-		duplicatesRemover.removeDuplicates(listWithDuplicates);
-		assertEquals(1, listWithDuplicates.getElementCount(1));
-		assertEquals(1, listWithDuplicates.getElementCount(2));
-		assertEquals(1, listWithDuplicates.getElementCount(3));
-		assertEquals(1, listWithDuplicates.getElementCount(4));
+	public void testCountElements() {
+		assertEquals(1, linkedListForTest.getElementCount(1));
+		assertEquals(2, linkedListForTest.getElementCount(2));
+		assertEquals(1, linkedListForTest.getElementCount(3));
+		assertEquals(3, linkedListForTest.getElementCount(4));
 	}
+
 }
